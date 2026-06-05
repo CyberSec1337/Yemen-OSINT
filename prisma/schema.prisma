@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  scans     Scan[]
+  apiKeys   ApiKey[]
+  
+  @@map("users")
+}
+
+model Scan {
+  id          String   @id @default(cuid())
+  target      String
+  scanType    String
+  status      String   @default("pending")
+  threatScore Int      @default(0)
+  startedAt   DateTime @default(now())
+  completedAt DateTime?
+  userId      String
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  results     Result[]
+  reports     Report[]
+  
+  @@map("scans")
+}
+
+model Result {
+  id          String   @id @default(cuid())
+  scanId      String
+  source      String
+  dataType    String
+  data        String
+  threatLevel Int      @default(0)
+  createdAt   DateTime @default(now())
+  
+  scan        Scan     @relation(fields: [scanId], references: [id], onDelete: Cascade)
+  
+  @@map("results")
+}
+
+model Report {
+  id        String   @id @default(cuid())
+  scanId    String
+  format    String
+  content   String
+  generatedAt DateTime @default(now())
+  
+  scan      Scan     @relation(fields: [scanId], references: [id], onDelete: Cascade)
+  
+  @@map("reports")
+}
+
+model ApiKey {
+  id        String   @id @default(cuid())
+  userId    String
+  service   String
+  keyName   String
+  encryptedKey String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("api_keys")
+}
+
+model Api {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  endpoint    String
+  method      String
+  headers     String   @default("{}")
+  enabled     Boolean  @default(true)
+  category    String   @default("general")
+  threatLevel Int      @default(2)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("apis")
+}
