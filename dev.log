@@ -1,0 +1,41 @@
+[33m[nodemon] 3.1.10[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): server.ts src/**/*[39m
+[33m[nodemon] watching extensions: ts,tsx,js,jsx[39m
+[32m[nodemon] starting `npx tsx server.ts`[39m
+> Ready on http://127.0.0.1:3000
+> Socket.IO server running at ws://127.0.0.1:3000/api/socketio
+ ○ Compiling / ...
+ ✓ Compiled / in 15.1s (1037 modules)
+ GET / 200 in 17619ms
+ ○ Compiling /api/setup ...
+ ✓ Compiled /api/setup in 4s (1028 modules)
+prisma:query BEGIN IMMEDIATE
+prisma:query SELECT `main`.`users`.`id` FROM `main`.`users` WHERE (`main`.`users`.`email` = ? AND 1=1) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`users`.`id`, `main`.`users`.`email`, `main`.`users`.`name`, `main`.`users`.`password`, `main`.`users`.`createdAt`, `main`.`users`.`updatedAt` FROM `main`.`users` WHERE (`main`.`users`.`id` = ? AND (`main`.`users`.`email` = ? AND 1=1)) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`users`.`id`, `main`.`users`.`email`, `main`.`users`.`name`, `main`.`users`.`password`, `main`.`users`.`createdAt`, `main`.`users`.`updatedAt` FROM `main`.`users` WHERE `main`.`users`.`id` = ? LIMIT ? OFFSET ?
+prisma:query COMMIT
+ POST /api/setup 200 in 4845ms
+ ○ Compiling /api/scans ...
+ ✓ Compiled /api/scans in 1470ms (1030 modules)
+ GET /api/scans 200 in 1647ms
+prisma:query SELECT `main`.`scans`.`id`, `main`.`scans`.`target`, `main`.`scans`.`scanType`, `main`.`scans`.`status`, `main`.`scans`.`threatScore`, `main`.`scans`.`startedAt`, `main`.`scans`.`completedAt`, `main`.`scans`.`userId` FROM `main`.`scans` WHERE 1=1 ORDER BY `main`.`scans`.`startedAt` DESC LIMIT ? OFFSET ?
+ ○ Compiling /api/apis ...
+ ✓ Compiled /api/apis in 904ms (1032 modules)
+ GET /api/apis 200 in 1012ms
+prisma:query SELECT `main`.`apis`.`id`, `main`.`apis`.`name`, `main`.`apis`.`description`, `main`.`apis`.`endpoint`, `main`.`apis`.`method`, `main`.`apis`.`headers`, `main`.`apis`.`enabled`, `main`.`apis`.`category`, `main`.`apis`.`threatLevel`, `main`.`apis`.`createdAt`, `main`.`apis`.`updatedAt` FROM `main`.`apis` WHERE 1=1 ORDER BY `main`.`apis`.`name` ASC LIMIT ? OFFSET ?
+ GET / 200 in 483ms
+prisma:query SELECT 1
+prisma:query BEGIN IMMEDIATE
+prisma:query SELECT `main`.`users`.`id` FROM `main`.`users` WHERE (`main`.`users`.`email` = ? AND 1=1) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`users`.`id`, `main`.`users`.`email`, `main`.`users`.`name`, `main`.`users`.`password`, `main`.`users`.`createdAt`, `main`.`users`.`updatedAt` FROM `main`.`users` WHERE (`main`.`users`.`id` = ? AND (`main`.`users`.`email` = ? AND 1=1)) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`users`.`id`, `main`.`users`.`email`, `main`.`users`.`name`, `main`.`users`.`password`, `main`.`users`.`createdAt`, `main`.`users`.`updatedAt` FROM `main`.`users` WHERE `main`.`users`.`id` = ? LIMIT ? OFFSET ?
+prisma:query COMMIT
+ POST /api/setup 200 in 307ms
+prisma:query SELECT `main`.`scans`.`id`, `main`.`scans`.`target`, `main`.`scans`.`scanType`, `main`.`scans`.`status`, `main`.`scans`.`threatScore`, `main`.`scans`.`startedAt`, `main`.`scans`.`completedAt`, `main`.`scans`.`userId` FROM `main`.`scans` WHERE 1=1 ORDER BY `main`.`scans`.`startedAt` DESC LIMIT ? OFFSET ?
+ GET /api/scans 200 in 85ms
+ GET /api/apis 200 in 60ms
+prisma:query SELECT `main`.`apis`.`id`, `main`.`apis`.`name`, `main`.`apis`.`description`, `main`.`apis`.`endpoint`, `main`.`apis`.`method`, `main`.`apis`.`headers`, `main`.`apis`.`enabled`, `main`.`apis`.`category`, `main`.`apis`.`threatLevel`, `main`.`apis`.`createdAt`, `main`.`apis`.`updatedAt` FROM `main`.`apis` WHERE 1=1 ORDER BY `main`.`apis`.`name` ASC LIMIT ? OFFSET ?
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 2.3s (1010 modules)
+ POST /api/settings/apis 404 in 3066ms
